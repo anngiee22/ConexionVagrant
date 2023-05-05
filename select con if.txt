@@ -1,0 +1,31 @@
+       <option value="<?php echo $TipoSangreElegido  ?>" selected="selected"><?php echo $consultaDatosSeleccionados['nombreTipoSangre']  ?></option>
+<select name="tipoSangre" ><br>
+              <option value="" selected="selected">- Seleccione -</option>           
+ <?php
+                $sql="SELECT * FROM TipoSangre WHERE claveTipoSangre != '$TipoSangreElegido'";
+                $ejecutar=mysqli_query($conectaServidor,$sql);
+                while($valores = mysqli_fetch_array($ejecutar)){
+                    echo '<option value="'.$valores[claveTipoSangre].'">'.$valores[nombreTipoSangre].'</option>';
+                }
+            ?>
+
+
+
+
+
+<html>
+    <body>
+    <button><a href="TipoSangre.php">Regresar</a></button><br><center>
+
+    <?php echo "Tipo de Sangre: ".$consultaDatosSeleccionados['nombreTipoSangre'] ?><br>
+    <select name="tipoSangre" >
+        <?php
+            while($valores = mysqli_fetch_array($consultaDatos)){
+                if($valores['claveTipoSangre'] == $consultaDatosSeleccionados['claveTipoSangre']){ ?>
+                    <option value="<?php echo $valores['claveTipoSangre'] ?>" selected="selected"><?php echo $valores['nombreTipoSangre'] ?></option>
+                <?php} else{ ?>
+                    <option value="<?php echo $valores['claveTipoSangre'] ?>"><?php echo $valores['nombreTipoSangre'] ?></option>
+                <?php}}?>
+    </select>
+    </body>
+</html>
